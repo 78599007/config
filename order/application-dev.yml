@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: order-server
+server:
+  port: 2084
+eureka:
+  instance:
+    appname: ${spring.application.name}
+  client:
+    service-url:
+      defaultZone: http://test:123456@localhost:1080/eureka/
+      # 缓存清单的更新时间，默认30秒
+    registry-fetch-interval-seconds: 30

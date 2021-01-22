@@ -1,0 +1,36 @@
+server:
+  port: 2000
+spring:
+  application:
+    name: cti-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: goods
+          uri: lb://goods-server
+          predicates:
+            - Path=/goods/**
+        - id: order
+          uri: lb://order-server
+          predicates:
+            - Path=/order/**
+        - id: customer
+          uri: lb://customer-server
+          predicates:
+            - Path=/customer/**
+        - id: user
+          uri: lb://user-server
+          predicates:
+            - Path=/user/**
+        - id: laboratory
+          uri: lb://laboratory-server
+          predicates:
+            - Path=/laboratory/**
+eureka:
+  instance:
+    appname: ${spring.application.name}
+  client:
+    service-url:
+      defaultZone: http://test:123456@localhost:1080/eureka/,http://test:123456@localhost:1082/eureka/
+      # 缓存清单的更新时间，默认30秒
+    registry-fetch-interval-seconds: 30
